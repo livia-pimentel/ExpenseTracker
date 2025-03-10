@@ -13,15 +13,30 @@ public class Expense {
 
     // Expense class constructor
     public Expense(LocalDate date, String description, double amount, String category) {
-
+        this.date = date;
+          
+        // Checks if the description is empty
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("The description cannot be empty.");
+        }
+        // Controls the blanks
+        description = description.trim().replaceAll("\\s+", " ");
+        // Removal of special characters
+        description = description.replaceAll("[^a-zA-Z0-9\\s]", "");
+        // Capitalizes the first letter 
+        if (!Character.isUpperCase(description.charAt(0))) {
+            description = Character.toUpperCase(description.charAt(0)) + description.substring(1);
+        }
+        this.description = description;
+        
+               
         // Checks if the value is greater than zero
         if (amount < 0) {
             throw new IllegalArgumentException("The value of the expense cannot be negative.");
         }
-
-        this.date = date;
-        this.description = description;
+             
         this.amount = amount;
+
         this.category = category;
     }
 
@@ -49,6 +64,18 @@ public class Expense {
     }
 
     public void setDescription(String description) {
+        // Checks if the description is empty
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("The description cannot be empty.");
+        }
+        // Controls the blanks
+        description = description.trim().replaceAll("\\s+", " ");
+        // Removal of special characters
+        description = description.replaceAll("[^a-zA-Z0-9\\s]", "");
+        // Capitalizes the first letter 
+        if (!Character.isUpperCase(description.charAt(0))) {
+            description = Character.toUpperCase(description.charAt(0)) + description.substring(1);
+        }
         this.description = description;
     }
 
