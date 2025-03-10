@@ -13,6 +13,12 @@ public class Expense {
 
     // Expense class constructor
     public Expense(LocalDate date, String description, double amount, String category) {
+
+        // Checks if the value is greater than zero
+        if (amount < 0) {
+            throw new IllegalArgumentException("The value of the expense cannot be negative.");
+        }
+
         this.date = date;
         this.description = description;
         this.amount = amount;
@@ -47,6 +53,11 @@ public class Expense {
     }
 
     public void setAmount(double amount) {
+        // Checks if the value is greater than zero
+        if (amount < 0) {
+            throw new IllegalArgumentException("The value of the expense cannot be negative.");
+        }
+
         this.amount = amount;
     }
 
