@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-
-
 /*
  * Class representing an individual expense. 
  */
@@ -21,19 +19,23 @@ public class Expense {
         }
         // Controls the blanks
         description = description.trim().replaceAll("\\s+", " ");
+
         // Removal of special characters
         description = description.replaceAll("[^a-zA-Z0-9\\s]", "");
+
         // Capitalizes the first letter 
         if (!Character.isUpperCase(description.charAt(0))) {
             description = Character.toUpperCase(description.charAt(0)) + description.substring(1);
         }
+
         this.description = description;
         
                
         // Checks if the value is greater than zero
         if (amount < 0) {
             throw new IllegalArgumentException("The value of the expense cannot be negative.");
-        }    
+        }  
+
         this.amount = amount;
 
         // Checks if the category is empty
@@ -42,12 +44,15 @@ public class Expense {
         }
         // Controls the blanks
         category = category.trim().replaceAll("\\s+", " ");
+
         // Removal of special characters
         category = category.replaceAll("[^a-zA-Z0-9\\s]", "");
+
         // Capitalizes the first letter 
         if (!Character.isUpperCase(category.charAt(0))) {
             category = Character.toUpperCase(category.charAt(0)) + category.substring(1);
         }
+
         this.category = category;
     }
 
@@ -75,22 +80,28 @@ public class Expense {
     }
 
     public void setDescription(String description) {
+
         // Checks if the description is empty
         if (description == null || description.trim().isEmpty()) {
             throw new IllegalArgumentException("The description cannot be empty.");
         }
+
         // Controls the blanks
         description = description.trim().replaceAll("\\s+", " ");
+
         // Removal of special characters
         description = description.replaceAll("[^a-zA-Z0-9\\s]", "");
+
         // Capitalizes the first letter 
         if (!Character.isUpperCase(description.charAt(0))) {
             description = Character.toUpperCase(description.charAt(0)) + description.substring(1);
         }
+
         this.description = description;
     }
 
     public void setAmount(double amount) {
+
         // Checks if the value is greater than zero
         if (amount < 0) {
             throw new IllegalArgumentException("The value of the expense cannot be negative.");
@@ -100,18 +111,23 @@ public class Expense {
     }
 
     public void setCategory(String category) {
+
         // Checks if the category is empty
         if (category == null || category.trim().isEmpty()) {
             throw new IllegalArgumentException("The category cannot be empty.");
         }
+
         // Controls the blanks
         category = category.trim().replaceAll("\\s+", " ");
+
         // Removal of special characters
         category = category.replaceAll("[^a-zA-Z0-9\\s]", "");
+
         // Capitalizes the first letter 
         if (!Character.isUpperCase(category.charAt(0))) {
             category = Character.toUpperCase(category.charAt(0)) + category.substring(1);
         }
+
         this.category = category;
     }
 }
