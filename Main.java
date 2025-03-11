@@ -64,6 +64,25 @@ public class Main {
         
             tracker.addExpense(expense);
         }
+
+        // This method will give the possibility to use the current date or not
+        private static LocalDate getDateFromUser(Scanner scanner ) {
+            System.out.println("Use current date: (Y/N): ");
+            String choice = scanner.nextLine();
+            
+            if (choice.equalsIgnoreCase("Y")) {
+                return LocalDate.now();
+            } else {
+                System.out.print("Enter year: ");
+                int year = scanner.nextInt();
+                System.out.print("Enter month: ");
+                int month = scanner.nextInt();
+                System.out.print("Enter day: ");
+                int day = scanner.nextInt();
+                scanner.nextLine();
+                return LocalDate.of(year, month, day);
+            }
+        }
     }
 
 
