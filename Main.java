@@ -24,7 +24,24 @@ public class Main {
             choice = scanner.nextInt();
             scanner.nextLine(); // Clear the buffer
 
+            switch (choice) {
+                case 1:
+                    addExpense(scanner, tracker);
+                    saveExpensesToFile(tracker); // Save expenses in the file
+                    break;
+            
+                case 2:
+                    String report = tracker.generateReport();
+                    System.out.println(report);
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid Option.");
+            }
         }
+        scanner.close();
 
         // Collects the user’s information
         System.out.print("Enter the expense category: ");
