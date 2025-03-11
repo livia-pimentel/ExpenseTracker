@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 import java.util.Locale;
-import java.util.Scanner; 
+import java.util.Scanner;
 
 /*
  * class Main that starts the ExpenseTracker application
@@ -42,26 +42,30 @@ public class Main {
             }
         }
         scanner.close();
-
-        // Collects the user’s information
-        System.out.print("Enter the expense category: ");
-        String category =  scanner.nextLine();
-
-        System.out.print("Enter the expense description: ");
-        String description = scanner.nextLine();
-
-        System.out.print("Enter the amount of the expense: ");
-        double amount = scanner.nextDouble();
-        scanner.nextLine(); // Clear the buffer
-
-        Expense expense = new Expense(LocalDate.now(), description, amount, category);
-
-        tracker.addExpense(expense);
-
-        String report = tracker.generateReport();
-        System.out.println(report);
-
-        scanner.close();
-
     }
-}
+
+        private static void addExpense(Scanner scanner, ExpenseTracker tracker) {
+            // Capture the date
+            LocalDate date = getDateFromUser(scanner);
+        
+            // Collects the user’s information
+            System.out.print("Enter the expense category: ");
+            String category = scanner.nextLine();
+        
+            System.out.print("Enter the expense description: ");
+            String description = scanner.nextLine();
+        
+            System.out.print("Enter the amount of the expense: ");
+            double amount = scanner.nextDouble();
+            scanner.nextLine(); // Clear the buffer
+        
+            // Use the date collected from the user
+            Expense expense = new Expense(date, description, amount, category);
+        
+            tracker.addExpense(expense);
+        }
+    }
+
+
+
+
