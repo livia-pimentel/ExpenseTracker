@@ -96,7 +96,7 @@ public class ExpenseTracker {
 
         // Used to create and manipulate mutable strings.
         StringBuilder report = new StringBuilder();
-        report.append("--- Expense Report ---\\n");
+        report.append("--- Expense Report ---\n");
 
         // Use currency format
         Locale locale = Locale.of("en", "US");
@@ -112,13 +112,13 @@ public class ExpenseTracker {
                 String description = expense.getDescription().replaceAll("[^a-zA-Z0-9\\\\s]", "");
 
                 report.append("Date: ").append(expense.getDate()).append(", ");
-                report.append("Category: ").append(category).append(", ");
-                report.append("Description: ").append(description).append(", ");
-                report.append("Value: ").append(currencyFormat.format(expense.getAmount())).append("\n");
+                report.append("\nCategory: ").append(category).append(", ");
+                report.append("\nDescription: ").append(description).append(", ");
+                report.append("\nValue: ").append(currencyFormat.format(expense.getAmount())).append("\n");
             } 
         }
 
-        report.append("\n--- Spending By Category ---\\n");
+        report.append("\n--- Spending By Category ---\n");
         Map<String, Double> categoryTotals = analyzeExpensesByCategory();
         for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
             report.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
