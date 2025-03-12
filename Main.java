@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -100,21 +101,28 @@ public class Main {
             } catch (IOException e) {
                 System.out.println("Error saving expenses: " + e.getMessage());
             }
+        }
     
 
         private static void loadExpensesFromFile(ExpenseTracker tracker) {
             try (BufferedReader reader = new BufferedReader(new FileReader("expenses.csv"))) {
-                for (Expense expense : tracker.getExpenses()) {
-                    writer.write(expense.getDate() + ", " + expense.getCategory() + expense.getDescription() + ", " + expense.getAmount());
-                    writer.newLine();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    LocalDate date = LocalDate.parse(parts[0]);
+                    String category = parts[1];
+                    String description = parts[2];
+                    double amount = Double.parseDouble(parts[3]);
+                    Expense expense = new Expense(date, description, amount, category);
+                    tracker.addExpense(expense);
                 }
+            } catch (FileNotFoundException e) {
+                System.out.println("Expense file not found or empty.");
             } catch (IOException e) {
-                System.out.println("Error saving expenses: " + e.getMessage());
+                System.out.println("Error loading expenses: " + e.getMessage());
             }
         }
-
-
-    }
+}
 
 
 
