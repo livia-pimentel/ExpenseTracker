@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Writer;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Scanner;
@@ -83,6 +87,19 @@ public class Main {
                 return LocalDate.of(year, month, day);
             }
         }
+
+        private static void loadExpensesFromFile(ExpenseTracker tracker) {
+            try (BufferedReader reader = new BufferedReader(new FileReader("expenses.csv"))) {
+                for (Expense expense : tracker.getExpenses()) {
+                    writer.write(expense.getDate() + ", " + expense.getCategory() + expense.getDescription() + ", " + expense.getCategory());
+                    write.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Error saving expenses: " + e.getMessage());
+            }
+        }
+
+        
     }
 
 
