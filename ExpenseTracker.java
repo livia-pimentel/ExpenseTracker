@@ -120,6 +120,7 @@ public class ExpenseTracker {
                 report.append("\nCategory: ").append(category).append(", ");
                 report.append("\nDescription: ").append(description).append(", ");
                 report.append("\nValue: ").append(currencyFormat.format(expense.getAmount())).append("\n");
+                report.append("--- ----- ---\n");
             } 
         }
 
@@ -129,6 +130,7 @@ public class ExpenseTracker {
             report.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
         }
 
+        report.append("-------- ----- ------\n");
         report.append("\nTotal: ").append(currencyFormat.format(calculateTotalExpenses()));
         return report.toString();
     }

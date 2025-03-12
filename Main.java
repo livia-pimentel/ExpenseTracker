@@ -23,9 +23,10 @@ public class Main {
         // Menu choices
         int choice = 0;
         while (choice !=3) {
+            System.out.println("\n --- Options --- \n");
             System.out.println("1. Add Expense");
             System.out.println("2. Generate Report"); 
-            System.out.println("3. Exit");
+            System.out.println("3. Exit \n");
             System.out.println("Choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Clear the buffer
