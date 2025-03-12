@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.time.LocalDate;
@@ -88,18 +90,30 @@ public class Main {
             }
         }
 
+ 
+        private static void saveExpensesToFile(ExpenseTracker tracker) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("expenses.csv"))) {
+                for (Expense expense : tracker.getExpenses()) {
+                    writer.write(expense.getDate() + ", " + expense.getCategory() + ", " + expense.getDescription() + ", " + expense.getAmount());
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Error saving expenses: " + e.getMessage());
+            }
+    
+
         private static void loadExpensesFromFile(ExpenseTracker tracker) {
             try (BufferedReader reader = new BufferedReader(new FileReader("expenses.csv"))) {
                 for (Expense expense : tracker.getExpenses()) {
-                    writer.write(expense.getDate() + ", " + expense.getCategory() + expense.getDescription() + ", " + expense.getCategory());
-                    write.newLine();
+                    writer.write(expense.getDate() + ", " + expense.getCategory() + expense.getDescription() + ", " + expense.getAmount());
+                    writer.newLine();
                 }
             } catch (IOException e) {
                 System.out.println("Error saving expenses: " + e.getMessage());
             }
         }
 
-        
+
     }
 
 
