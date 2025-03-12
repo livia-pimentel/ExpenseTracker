@@ -63,7 +63,7 @@ public class ExpenseTracker {
         }
 
         // Calculate expenses
-        double total = 0;
+        double total = 0.00;
         for (Expense expense : expenses) {
             //  Checks if the expense isn't null
             if (expense != null) {
@@ -129,7 +129,7 @@ public class ExpenseTracker {
             report.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
         }
 
-        report.append("\nTotal: ").append(currencyFormat.format(calculateTotalExpenses()));
+        report.append("\nTotal: \n").append(currencyFormat.format(calculateTotalExpenses()));
         return report.toString();
     }
  }
