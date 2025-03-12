@@ -19,6 +19,11 @@ public class ExpenseTracker {
 
     }
 
+    // Return the list of expenses
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
     // Adds an expense to the list
     public void addExpense(Expense expense) {
 
