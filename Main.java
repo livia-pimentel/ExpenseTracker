@@ -73,27 +73,124 @@ public class Main {
         }
 
         // This method will give the possibility to use the current date or not
-        private static LocalDate getDateFromUser(Scanner scanner ) {
+        private static LocalDate getDateFromUser(Scanner scanner) {
 
-            // Option to use current date or no
-            System.out.println("Use current date: (Y/N): ");
-            String choice = scanner.nextLine();
-            
+            System.out.print("Use current date? (Y/N): ");
+            String choice = scanner.nextLine().trim();
+
             if (choice.equalsIgnoreCase("Y")) {
 
                 return LocalDate.now();
 
-            } else { // Put the date information
+            } else {
 
-                System.out.print("Enter year: ");
-                int year = scanner.nextInt();
-                System.out.print("Enter month: ");
-                int month = scanner.nextInt();
-                System.out.print("Enter day: ");
-                int day = scanner.nextInt();
-                scanner.nextLine();
+                int year = 0, month = 0, day = 0;
+                boolean validYear = false, validMonth = false, validDay = false;
+        
+                // Loop to validate the year
+                while (!validYear) {
+
+                    System.out.print("Enter year (YYYY): ");
+                    String yearInput = scanner.nextLine().trim(); // Remove blank space
+
+                    if (yearInput.isEmpty()) { // Checks if it is empty
+
+                        System.out.println("Year cannot be empty.");
+                        continue;
+
+                    }
+                    try {
+
+                        year = Integer.parseInt(yearInput);
+
+                        if (String.valueOf(year).length() != 4) {
+                            throw new IllegalArgumentException("Year must have 4 digits.");
+                        }
+
+                        validYear = true;
+
+                    } catch (NumberFormatException e) {
+
+                        System.out.println("Invalid year. Please enter a number.");
+
+                    } catch (IllegalArgumentException e) {
+
+                        System.out.println(e.getMessage());
+                    }
+                }
+        
+                // Loop to validate the month
+                while (!validMonth) {
+
+                    System.out.print("Enter month (MM): ");
+                    String monthInput = scanner.nextLine().trim(); // Remove blank spaces
+
+                    if (monthInput.isEmpty()) { // Checks if it is empty
+
+                        System.out.println("Month cannot be empty.");
+                        continue;
+
+                    }
+                    try {
+
+                        month = Integer.parseInt(monthInput);
+
+                        if (String.valueOf(month).length() != 1 || month < 1 || month > 12) {
+
+                            throw new IllegalArgumentException("Month must have 1 digits and be between 1 and 12.");
+
+                        }
+
+                        validMonth = true;
+
+                    } catch (NumberFormatException e) {
+
+                        System.out.println("Invalid month. Please enter a number.");
+
+                    } catch (IllegalArgumentException e) {
+
+                        System.out.println(e.getMessage());
+
+                    }
+                }
+        
+                // Loop to validate the day
+                while (!validDay) {
+
+                    System.out.print("Enter day (DD): ");
+                    String dayInput = scanner.nextLine().trim(); // Remove blank spaces
+
+                    if (dayInput.isEmpty()) { // Checks if it is empty
+
+                        System.out.println("Day cannot be empty.");
+                        continue;
+
+                    }
+
+                    try {
+
+                        day = Integer.parseInt(dayInput);
+
+                        if (day < 1 || day > 31) {
+
+                            throw new IllegalArgumentException("Day must be between 1 and 31.");
+
+                        }
+
+                        validDay = true;
+
+                    } catch (NumberFormatException e) {
+
+                        System.out.println("Invalid day. Please enter a number.");
+
+                    } catch (IllegalArgumentException e) {
+
+                        System.out.println(e.getMessage());
+
+                    }
+                }
+        
                 return LocalDate.of(year, month, day);
-
             }
         }
 
@@ -142,7 +239,7 @@ public class Main {
             } catch (IOException e) {
 
                 System.out.println("Error loading expenses: " + e.getMessage());
-                
+
             }
         }
 }
