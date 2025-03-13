@@ -49,7 +49,7 @@ The application was written in **Java**, a versatile and widely used programming
 - [JDK 23 - Documentation](https://docs.oracle.com/en/java/javase/23/)
 - [Java - Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Visual Studio Code - Documentation](https://code.visualstudio.com/docs)
-- [Git - Documentation](https://code.visualstudio.com/docs)
+- [Git - Documentation](https://git-scm.com/doc)
 - [GitHub - Documentation](https://docs.github.com/en)
 - [Stack Overflow - Questions](https://stackoverflow.com/questions)
 
