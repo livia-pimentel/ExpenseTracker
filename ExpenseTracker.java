@@ -127,7 +127,7 @@ public class ExpenseTracker {
         report.append("\n--- Spending By Category ---\n");
         Map<String, Double> categoryTotals = analyzeExpensesByCategory();
         for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
-            report.append(entry.getKey()).append(": $").append(entry.getValue()).append("\n");
+            report.append(entry.getKey()).append(": $").append(String.format(Locale.US,"%.2f", entry.getValue())).append("\n");
         }
 
         report.append("-------- ----- ------\n");
