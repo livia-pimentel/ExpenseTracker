@@ -75,7 +75,10 @@ public class Main {
                     System.out.println("Category contains invalid characters.");
                     continue;
                 }
+
+                category = formaString(category);
                 break; // Valid category
+
 
             }
             
@@ -99,9 +102,11 @@ public class Main {
 
                 }
 
+                description = formaString(description);
                 break; // Valid description
                 
             }
+
 
             
         
@@ -113,6 +118,17 @@ public class Main {
             Expense expense = new Expense(date, description, amount, category);
         
             tracker.addExpense(expense);
+        }
+
+        private static String formaString(String str) {
+
+            if (str == null || str.isEmpty()) { 
+
+                return str;
+
+            }
+
+            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
         }
 
         // This method will give the possibility to use the current date or not
