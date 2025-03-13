@@ -57,8 +57,28 @@ public class Main {
             LocalDate date = getDateFromUser(scanner);
         
             // Collects the user’s information
-            System.out.print("Enter the expense category: ");
-            String category = scanner.nextLine();
+            String category;
+            while (true) {
+                
+                System.out.print("Enter the expense category: ");
+                category = scanner.nextLine().trim(); // Remove spaces
+
+                if (category.isEmpty()) {
+
+                    System.out.println("Category cannot be empty.");
+                    continue;
+
+                }
+
+                if (!category.matches("[a-zA-Z\\\\s]+")) { //  Only alphanumeric and spaces
+
+                    System.out.println("Category contains invalid characters.");
+                    continue;
+                }
+                break; // Valid category
+
+            }
+            
         
             System.out.print("Enter the expense description: ");
             String description = scanner.nextLine();
