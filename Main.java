@@ -79,9 +79,31 @@ public class Main {
 
             }
             
-        
-            System.out.print("Enter the expense description: ");
-            String description = scanner.nextLine();
+            String description;
+            while (true) {
+               
+                System.out.print("Enter the expense description: ");
+                description = scanner.nextLine().trim(); // Remove spaces
+
+                if (description.isEmpty()) {
+                    
+                    System.out.println("Description cannot be empty.");
+                    continue;
+
+                }
+
+                if (!description.matches("[a-zA-Z\\\\s]+")) { // Only letters and spaces
+
+                    System.out.println("Description contains invalid characters (numbers or symbols).");
+                    continue;
+
+                }
+
+                break; // Valid description
+                
+            }
+
+            
         
             System.out.print("Enter the amount of the expense: ");
             double amount = scanner.nextDouble();
