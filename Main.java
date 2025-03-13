@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -13,6 +15,8 @@ import java.util.Scanner;
  */
 
 public class Main {
+
+    private static List<String> existingCategories = new ArrayList<>();
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in); // Read the user input
@@ -51,87 +55,137 @@ public class Main {
         scanner.close();
     }
 
-        private static void addExpense(Scanner scanner, ExpenseTracker tracker) {
+    private static void addExpense(Scanner scanner, ExpenseTracker tracker) {
+        // Capture the date
+        LocalDate date = getDateFromUser(scanner);
+    
+        // Get category from user
+        String category = getCategoryFromUser(scanner); // Obtém a categoria corretamente
+    
+        // Collects the user’s information (description)
+        String description;
+        while (true) {
+            System.out.print("Enter the expense description: ");
+            description = scanner.nextLine().trim(); // Remove spaces
+    
+            if (description.isEmpty()) {
+                System.out.println("Description cannot be empty.");
+                continue;
+            }
+    
+            if (!description.matches("[a-zA-Z\\s]+")) { // Only letters and spaces
+                System.out.println("Description contains invalid characters (numbers or symbols).");
+                continue;
+            }
+    
+            description = formaString(description);
+            break; // Valid description
+        }
+    
+        double amount = 0.00;
+        while (true) {
+            System.out.print("Enter the amount of the expense: ");
+            String amountInput = scanner.nextLine().trim(); // Read as string
+    
+            try {
+                amount = Double.parseDouble(amountInput.replace(",", ".")); // Replace comma and parse
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a valid number.");
+            }
+        }
+    
+        // Use the date collected from the user
+        Expense expense = new Expense(date, description, amount, category);
+    
+        tracker.addExpense(expense);
+    }
+    
+    private static String getCategoryFromUser(Scanner scanner) {
+        String category;
+    
+        if (existingCategories.isEmpty()) { // Check if the list is empty
             
-            // Capture the date
-            LocalDate date = getDateFromUser(scanner);
-        
-            // Collects the user’s information
-            String category;
+            System.out.print("Enter category: ");
+            category = scanner.nextLine().trim(); // Remove spaces
+    
+            if (category.isEmpty()) {
+
+                System.out.println("Category cannot be empty.");
+                return getCategoryFromUser(scanner);
+
+            }
+    
+            if (!category.matches("[a-zA-Z\\s]+")) {
+
+                System.out.println("Category contains invalid characters (numbers or symbols).");
+                return getCategoryFromUser(scanner);
+
+            }
+    
+            category = formaString(category);
+            existingCategories.add(category);
+            return category;
+    
+        } else {
+
             while (true) {
-                
-                System.out.print("Enter the expense category: ");
+                System.out.println("Existing categories: ");
+    
+                for (int i = 0; i < existingCategories.size(); i++) {
+                    System.out.println((i + 1) + ". " + existingCategories.get(i));
+                }
+    
+                System.out.print("Enter category (or choose from existing): ");
                 category = scanner.nextLine().trim(); // Remove spaces
-
+    
                 if (category.isEmpty()) {
-
                     System.out.println("Category cannot be empty.");
                     continue;
-
                 }
 
-                if (!category.matches("[a-zA-Z\\\\s]+")) { //  Only alphanumeric and spaces
-
-                    System.out.println("Category contains invalid characters.");
-                    continue;
-                }
-
-                category = formaString(category);
-                break; // Valid category
-
-
-            }
-            
-            String description;
-            while (true) {
-               
-                System.out.print("Enter the expense description: ");
-                description = scanner.nextLine().trim(); // Remove spaces
-
-                if (description.isEmpty()) {
-                    
-                    System.out.println("Description cannot be empty.");
-                    continue;
-
-                }
-
-                if (!description.matches("[a-zA-Z\\\\s]+")) { // Only letters and spaces
-
-                    System.out.println("Description contains invalid characters (numbers or symbols).");
-                    continue;
-
-                }
-
-                description = formaString(description);
-                break; // Valid description
-                
-            }
-
-            double amount = 0.00;
-            while (true) {
-
-                System.out.print("Enter the amount of the expense: ");
-                String amountInput = scanner.nextLine().trim(); // Read as string
-
+                // Check if the input is a number
                 try {
+
+                    int choice = Integer.parseInt(category);
+                    if (choice >= 1 && choice <= existingCategories.size()) {
+
+                        return existingCategories.get(choice - 1);
+                        
+                    } else {
+
+                        System.out.println("Invalid category number.");
+                        continue;
+
+                    }
                     
-                    amount = Double.parseDouble(amountInput.replace(",", ".")); // Replace comma and parse
-                    break;
-
                 } catch (NumberFormatException e) {
+                    
+                    if (!category.matches("[a-zA-Z\\s]+")) {
+                        
+                        System.out.println("Category contains invalid characters (numbers or symbols).");
 
-                    System.out.println("Invalid amount. Please enter a valid number.");
+                    }
 
                 }
-
+    
+                if (!category.matches("[a-zA-Z\\s]+")) { // Only letters and spaces
+                    System.out.println("Category contains invalid characters (numbers or symbols).");
+                    continue;
+                }
+    
+                category = formaString(category);
+    
+                if (!existingCategories.contains(category)) {
+                    existingCategories.add(category); // Add the category to list
+                }
+    
+                break; // Valid category
             }
-        
-            // Use the date collected from the user
-            Expense expense = new Expense(date, description, amount, category);
-        
-            tracker.addExpense(expense);
+            return category;
         }
-
+    }
+        // Pattern to text 
         private static String formaString(String str) {
 
             if (str == null || str.isEmpty()) { 
