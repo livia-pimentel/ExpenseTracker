@@ -107,12 +107,24 @@ public class Main {
                 
             }
 
+            double amount = 0.00;
+            while (true) {
 
-            
-        
-            System.out.print("Enter the amount of the expense: ");
-            double amount = scanner.nextDouble();
-            scanner.nextLine(); // Clear the buffer
+                System.out.print("Enter the amount of the expense: ");
+                String amountInput = scanner.nextLine().trim(); // Read as string
+
+                try {
+                    
+                    amount = Double.parseDouble(amountInput.replace(",", ".")); // Replace comma and parse
+                    break;
+
+                } catch (NumberFormatException e) {
+
+                    System.out.println("Invalid amount. Please enter a valid number.");
+
+                }
+
+            }
         
             // Use the date collected from the user
             Expense expense = new Expense(date, description, amount, category);
