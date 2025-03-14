@@ -124,14 +124,15 @@ public class ExpenseTracker {
             } 
         }
 
+        // // Constructs a report of spending by category, including the total expenses.
         report.append("\n--- Spending By Category ---\n");
-        Map<String, Double> categoryTotals = analyzeExpensesByCategory();
+        Map<String, Double> categoryTotals = analyzeExpensesByCategory(); // Analyzes expenses and groups them by category, storing the totals in a Map.
         for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
             report.append(entry.getKey()).append(": $").append(String.format(Locale.US,"%.2f", entry.getValue())).append("\n");
         }
 
         report.append("-------- ----- ------\n");
         report.append("\nTotal: ").append(currencyFormat.format(calculateTotalExpenses()));
-        return report.toString();
+        return report.toString(); // Returns the generated report as a String.
     }
  }

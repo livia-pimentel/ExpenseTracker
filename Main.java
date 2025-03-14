@@ -101,6 +101,7 @@ public class Main {
         tracker.addExpense(expense);
     }
     
+    // Retrieves the category of an expense from the user
     private static String getCategoryFromUser(Scanner scanner) {
         String category;
     
@@ -319,6 +320,7 @@ public class Main {
             }
         }
 
+         // Saves the expenses from the ExpenseTracker to a CSV file.
          private static void saveExpensesToFile(ExpenseTracker tracker) {
 
             // Used to write into CSV file
